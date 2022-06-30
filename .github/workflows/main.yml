@@ -23,7 +23,7 @@ jobs:
          minikube start
       - name: helm install
         run:
-         helm install app react/ --values react/values.yaml
+         helm install backend backend/ --values backend/values.yaml
       
       
       - name: Sleep for 300 seconds
