@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+ 
+  build:
+    runs-on: ubuntu-latest
+   
+    steps:
+     
+      - uses: actions/checkout@v3
+      - name: make build
+        run:
+         make build
+      - name: make push
+        run:
+         make push
+   
+      - name: minikube start
+        run: 
+         minikube start
+      - name: helm install
+        run:
+         helm install app react/ --values react/values.yaml
+      
+      
+      - name: Sleep for 300 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+         time: 150s
+         
+      - name: get services
+        run: kubectl get services  
