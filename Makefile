@@ -12,3 +12,4 @@ login:
 
 push:	login	
 	docker push ${DOCKER_NAME}/${REPO_NAME}:latest
+how to connect the  ingress with the load balnacer
