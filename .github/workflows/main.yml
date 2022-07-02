@@ -1,3 +1,4 @@
+
 name: CI
 
 on:
@@ -11,6 +12,19 @@ jobs:
     steps:
      
       - uses: actions/checkout@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}      
+         aws-region: us-east-1
+        # role-to-assume: arn:aws:iam::779527285137:role/AWSdevopscerttaskrole
+      - name: cluster credentials
+        run: Cross_Acc_Role=$(aws sts assume-role --role-arn arn:aws:iam::779527285137:role/AWSdevopscerttaskrole --role-session-name AWSCLI-Session --profile default) export AWS_ACCESS_KEY_ID=$(echo $Cross_Acc_Role | jq -r .Credentials.AccessKeyId) export AWS_SECRET_ACCESS_KEY=$(echo $Cross_Acc_Role | jq -r .Credentials.SecretAccessKey) export AWS_SESSION_TOKEN=$(echo $Cross_Acc_Role | jq -r .Credentials.SessionToken)
+    
+      - name: cluster connetion
+        run: aws eks update-kubeconfig --name cluster_project1 --region us-east-1
+        
       - name: make build
         run:
          make build
@@ -18,12 +32,12 @@ jobs:
         run:
          make push
    
-      - name: minikube start
-        run: 
-         minikube start
+   #   - name: minikube start
+    #    run: 
+     #    minikube start
       - name: helm install
         run:
-         helm install backend backend/ --values backend/values.yaml
+         helm install app react/ --values react/values.yaml
       
       
       - name: Sleep for 300 seconds
@@ -33,3 +47,4 @@ jobs:
          
       - name: get services
         run: kubectl get services  
+           
