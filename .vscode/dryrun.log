@@ -1,5 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/ravi/Desktop/dtask1'
+make: Entering directory '/home/ravi/dtask1'
+ 
 docker build -t ravishan123/reactapp:latest  .
-make: Leaving directory '/home/ravi/Desktop/dtask1'
+make: Leaving directory '/home/ravi/dtask1'
  

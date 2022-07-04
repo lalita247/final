@@ -8,6 +8,7 @@ image:
   repository: ravishan123/reactapp
   tag: latest
   pullPolicy: IfNotPresent
+
 imagePullSecrets: []
 nameOverride: "backend"
 fullnameOverride: "backend"
@@ -17,7 +18,7 @@ serviceAccount:
   create: true
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "svc-account"
+  name: ""
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -30,8 +31,6 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-
-
 service:
   type: LoadBalancer
   port: 8080
@@ -43,13 +42,12 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
-      paths: [/]
+      paths: []
 
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
