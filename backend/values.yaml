@@ -8,13 +8,6 @@ image:
   repository: ravishan123/reactapp
   tag: latest
   pullPolicy: IfNotPresent
-  podEnv:
-    - name: DATABASE_URL
-      value: "jdbc:mysql://database-1.cnsa7hfldn17.us-east-1.rds.amazonaws.com:3306/demo?useSSL=false"
-    - name: DATABASE_USERNAME
-      value: "admin"
-    - name: DATABASE_PASSWORD
-      value: "rootpassword"
 imagePullSecrets: []
 nameOverride: "backend"
 fullnameOverride: "backend"
