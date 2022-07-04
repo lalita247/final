@@ -26,7 +26,8 @@ jobs:
         run: aws eks update-kubeconfig --name cluster_project1 --region us-east-1
         
       - name: make build
-        run: 
+        run: |
+         sudo apt install maven 
          make build
       - name: make push
         run:
