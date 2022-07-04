@@ -20,7 +20,11 @@ jobs:
          aws-region: us-east-1
         # role-to-assume: arn:aws:iam::779527285137:role/AWSdevopscerttaskrole
       - name: cluster credentials
-        run: Cross_Acc_Role=$(aws sts assume-role --role-arn arn:aws:iam::779527285137:role/AWSdevopscerttaskrole --role-session-name AWSCLI-Session --profile default) export AWS_ACCESS_KEY_ID=$(echo $Cross_Acc_Role | jq -r .Credentials.AccessKeyId) export AWS_SECRET_ACCESS_KEY=$(echo $Cross_Acc_Role | jq -r .Credentials.SecretAccessKey) export AWS_SESSION_TOKEN=$(echo $Cross_Acc_Role | jq -r .Credentials.SessionToken)
+        run: |
+             Cross_Acc_Role=$(aws sts assume-role --role-arn arn:aws:iam::779527285137:role/AWSdevopscerttaskrole --role-session-name AWSCLI-Session --profile default) 
+             export AWS_ACCESS_KEY_ID=$(echo $Cross_Acc_Role | jq -r .Credentials.AccessKeyId) 
+             export AWS_SECRET_ACCESS_KEY=$(echo $Cross_Acc_Role | jq -r .Credentials.SecretAccessKey) 
+             export AWS_SESSION_TOKEN=$(echo $Cross_Acc_Role | jq -r .Credentials.SessionToken)
     
       - name: cluster connetion
         run: aws eks update-kubeconfig --name cluster_project1 --region us-east-1
@@ -37,7 +41,10 @@ jobs:
      #    minikube start
       - name: helm install
         run: |
-         Cross_Acc_Role=$(aws sts assume-role --role-arn arn:aws:iam::779527285137:role/AWSdevopscerttaskrole --role-session-name AWSCLI-Session --profile default) export AWS_ACCESS_KEY_ID=$(echo $Cross_Acc_Role | jq -r .Credentials.AccessKeyId) export AWS_SECRET_ACCESS_KEY=$(echo $Cross_Acc_Role | jq -r .Credentials.SecretAccessKey) export AWS_SESSION_TOKEN=$(echo $Cross_Acc_Role | jq -r .Credentials.SessionToken)
+         Cross_Acc_Role=$(aws sts assume-role --role-arn arn:aws:iam::779527285137:role/AWSdevopscerttaskrole --role-session-name AWSCLI-Session --profile default)  
+         export AWS_ACCESS_KEY_ID=$(echo $Cross_Acc_Role | jq -r .Credentials.AccessKeyId) 
+         export AWS_SECRET_ACCESS_KEY=$(echo $Cross_Acc_Role | jq -r .Credentials.SecretAccessKey)
+         export AWS_SESSION_TOKEN=$(echo $Cross_Acc_Role | jq -r .Credentials.SessionToken)
          aws eks update-kubeconfig --name cluster_project1 --region us-east-1
          helm install backend backend/ --values backend/values.yaml
       
