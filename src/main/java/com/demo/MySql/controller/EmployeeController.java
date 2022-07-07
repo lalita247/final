@@ -3,6 +3,7 @@ package com.demo.MySql.controller;
 import com.demo.MySql.model.Employee;
 import com.demo.MySql.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

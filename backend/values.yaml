@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: ravishan123/reactapp
-  tag: latest
+  repository: lisa247/emp1
+  tag: v3
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
